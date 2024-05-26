@@ -104,7 +104,6 @@ const Footer = () => {
 
   const moveBackward = () => {
     let secondsToSet = wavesurfer.current.getCurrentTime() - 5;
-    console.log(secondsToSet / duration);
 
     if (secondsToSet / duration < 0) {
       secondsToSet = 0;
@@ -114,11 +113,17 @@ const Footer = () => {
 
   const moveForward = () => {
     let secondsToSet = wavesurfer.current.getCurrentTime() + 5;
-    console.log(secondsToSet / duration);
     if (secondsToSet / duration > 1) {
       secondsToSet = duration;
     }
     wavesurfer.current.seekTo(secondsToSet / duration);
+  };
+
+  const downloadFile = () => {
+    const a = document.createElement("a");
+    a.href = audioFileURL;
+    a.download = "song";
+    a.click();
   };
 
   return (
@@ -130,7 +135,7 @@ const Footer = () => {
             &nbsp;&nbsp;&nbsp;&nbsp;
             <Text className="">Split</Text>
           </Button>
-          <Button variant="subtle" color="black">
+          <Button variant="subtle" color="black" onClick={downloadFile}>
             Download Section
           </Button>
         </Group>
